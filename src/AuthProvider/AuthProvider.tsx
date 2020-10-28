@@ -2,7 +2,7 @@ import Auth0Lock from "auth0-lock";
 import React, { ReactNode } from "react";
 import { Provider } from "../context";
 
-interface Props {
+interface AuthProviderProps {
   storageKey: string;
   clientId: string;
   domain: string;
@@ -24,7 +24,7 @@ export interface AuthProviderState {
 }
 
 export default class AuthProvider extends React.Component<
-  Props,
+  AuthProviderProps,
   AuthProviderState
 > {
   lock: Auth0LockStatic;
