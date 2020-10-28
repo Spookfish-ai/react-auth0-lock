@@ -1,7 +1,7 @@
 import React from "react";
-import { State } from "./AuthProvider/AuthProvider";
+import { AuthProviderState } from "./AuthProvider/AuthProvider";
 
-const context = React.createContext<State>({
+const context = React.createContext<AuthProviderState>({
   lock: undefined,
   login: () => null,
   logout: () => null,

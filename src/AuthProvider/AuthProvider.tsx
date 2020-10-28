@@ -6,12 +6,12 @@ interface Props {
   storageKey: string;
   clientId: string;
   domain: string;
-  options: Record<string, any>;
+  options: Auth0LockConstructorOptions;
   showLock?: boolean;
   children: ReactNode;
 }
 
-export interface State {
+export interface AuthProviderState {
   lock: Auth0LockStatic;
   login: () => void;
   logout: (returnTo: any) => void;
@@ -23,7 +23,10 @@ export interface State {
   profile?: any;
 }
 
-export default class AuthProvider extends React.Component<Props, State> {
+export default class AuthProvider extends React.Component<
+  Props,
+  AuthProviderState
+> {
   lock: Auth0LockStatic;
   tokenRenewalTimeout: null | NodeJS.Timeout;
 

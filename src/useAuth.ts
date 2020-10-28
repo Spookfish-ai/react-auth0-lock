@@ -1,7 +1,7 @@
 import AuthContext from "./context";
-import { State } from "./AuthProvider/AuthProvider";
+import { AuthProviderState } from "./AuthProvider/AuthProvider";
 import { useContext } from "react";
 
-const useAuth = () => useContext<State>(AuthContext);
+const useAuth = () => useContext<AuthProviderState>(AuthContext);
 
 export default useAuth;
