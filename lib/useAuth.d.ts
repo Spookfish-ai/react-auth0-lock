@@ -1,3 +1,3 @@
-import { State } from "./AuthProvider/AuthProvider";
-declare const useAuth: () => State;
+import { AuthProviderState } from "./AuthProvider/AuthProvider";
+declare const useAuth: () => AuthProviderState;
 export default useAuth;

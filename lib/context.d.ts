@@ -1,7 +1,7 @@
 import React from "react";
-import { State } from "./AuthProvider/AuthProvider";
-declare const context: React.Context<State>;
-declare const Provider: React.Provider<State>;
-declare const Consumer: React.Consumer<State>;
+import { AuthProviderState } from "./AuthProvider/AuthProvider";
+declare const context: React.Context<AuthProviderState>;
+declare const Provider: React.Provider<AuthProviderState>;
+declare const Consumer: React.Consumer<AuthProviderState>;
 export { Provider, Consumer };
 export default context;
