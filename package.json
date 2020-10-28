@@ -1,12 +1,12 @@
 {
   "name": "react-auth0-lock-ts",
+  "description": "React wrapper for Auth0 Lock using React Context API",
   "author": "Jan Hartmann <kontakt@janhartmann.dk>",
   "contributors": [
     "Paul van Dyk <paul@vandyk.fr>"
   ],
   "license": "MIT",
   "version": "1.0.0",
-  "description": "React wrapper for Auth0 Lock using React Context API",
   "keywords": [
     "react",
     "react-component",
@@ -14,14 +14,15 @@
     "auth",
     "context-api"
   ],
-  "main": "./build/index.js",
-  "module": "./build/index.es.js",
+  "main": "./lib/index.js",
+  "module": "./lib/index.es.js",
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Spookfish-ai/react-auth0-lock.git"
+    "url": "https://github.com/Spookfish-ai/react-auth0-lock-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/Spookfish-ai/react-auth0-lock/issues"
+    "url": "https://github.com/Spookfish-ai/react-auth0-lock-ts/issues"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
