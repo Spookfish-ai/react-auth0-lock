@@ -1,5 +1,5 @@
 {
-  "name": "react-auth0-lock-ts",
+  "name": "react-auth0-lock-typescript",
   "description": "React wrapper for Auth0 Lock using React Context API",
   "author": "Jan Hartmann <kontakt@janhartmann.dk>",
   "contributors": [
