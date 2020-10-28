@@ -1,38 +1,84 @@
 {
-  "name": "react-auth0-lock",
+  "name": "react-auth0-lock-ts",
   "author": "Jan Hartmann <kontakt@janhartmann.dk>",
+  "contributors": [
+    "Paul van Dyk <paul@vandyk.fr>"
+  ],
   "license": "MIT",
   "version": "1.0.0",
   "description": "React wrapper for Auth0 Lock using React Context API",
-  "keywords": ["react", "react-component", "auth0", "auth", "context-api"],
-  "main": "lib/index.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "auth0",
+    "auth",
+    "context-api"
+  ],
+  "main": "./build/index.js",
+  "module": "./build/index.es.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/janhartmann/react-auth0-lock.git"
+    "url": "https://github.com/Spookfish-ai/react-auth0-lock.git"
   },
   "bugs": {
-    "url": "https://github.com/janhartmann/react-auth0-lock/issues"
+    "url": "https://github.com/Spookfish-ai/react-auth0-lock/issues"
   },
   "scripts": {
-    "build": "babel src/ --out-dir lib/"
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build": "rollup -c",
+    "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
+    "test": "jest"
   },
   "peerDependencies": {
-    "react": "^16.3.2",
-    "auth0-lock": "^11.6.1"
+    "auth0-lock": "11.6.1",
+    "react": "16.3.2",
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.0.0-beta.47",
-    "@babel/core": "^7.0.0-beta.47",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.47",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.47",
-    "@babel/preset-env": "^7.0.0-beta.47",
-    "@babel/preset-react": "^7.0.0-beta.47",
-    "babel-eslint": "^8.2.3",
-    "babel-loader": "^8.0.0-beta",
-    "eslint": "^4.19.1",
-    "eslint-plugin-react": "^7.8.2"
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
+    "@babel/plugin-transform-typescript": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@rollup/plugin-commonjs": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
+    "@storybook/addon-actions": "^6.0.27",
+    "@storybook/addon-links": "^6.0.27",
+    "@storybook/addons": "^6.0.27",
+    "@storybook/react": "^6.0.27",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@types/auth0-lock": "^11.4.13",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^14.14.5",
+    "@types/testing-library__jest-dom": "^5.9.5",
+    "@types/testing-library__react": "^10.2.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "auth0-lock": "^11.27.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.12.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "fork-ts-checker-webpack-plugin": "^5.2.1",
+    "jest": "^26.6.1",
+    "prettier": "^2.1.2",
+    "prop-types": "^15.6.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "rollup": "^2.32.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript2": "^0.28.0",
+    "ts-jest": "^26.4.3",
+    "ts-loader": "^8.0.7",
+    "typescript": "^4.0.5"
   },
-  "dependencies": {
-    "prop-types": "^15.6.1"
-  }
+  "dependencies": {}
 }

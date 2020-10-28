@@ -1,22 +1,35 @@
-import React from "react";
-import PropTypes from "prop-types";
 import Auth0Lock from "auth0-lock";
+import React, { ReactNode } from "react";
+import { Provider } from "../context";
 
-import { Provider } from "./context";
+interface Props {
+  storageKey: string;
+  clientId: string;
+  domain: string;
+  options: Record<string, any>;
+  showLock?: boolean;
+  children: ReactNode;
+}
 
-export default class AuthProvider extends React.Component {
-  static propTypes = {
-    storageKey: PropTypes.string.isRequired,
-    clientId: PropTypes.string.isRequired,
-    domain: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired,
-    showLock: PropTypes.bool,
-    children: PropTypes.node
-  };
+export interface State {
+  lock: Auth0LockStatic;
+  login: () => void;
+  logout: (returnTo: any) => void;
+  expiresAt?: string;
+  isAuthenticated?: boolean;
+  accessToken?: AuthResult["accessToken"];
+  idToken?: AuthResult["idToken"];
+  idTokenPayload?: AuthResult["idTokenPayload"];
+  profile?: any;
+}
+
+export default class AuthProvider extends React.Component<Props, State> {
+  lock: Auth0LockStatic;
+  tokenRenewalTimeout: null | NodeJS.Timeout;
 
   static defaultProps = {
     storageKey: "auth:auth0",
-    options: {}
+    options: {},
   };
 
   constructor(props) {
@@ -26,16 +39,17 @@ export default class AuthProvider extends React.Component {
     this.state = {
       lock: this.lock,
       login: this.login,
-      logout: this.logout
+      logout: this.logout,
+      expiresAt: null,
     };
   }
 
   componentDidMount() {
     this.rehyrate(); // Sync local storage to state
-    this.lock.on("authenticated", authResult => {
+    this.lock.on("authenticated", (authResult) => {
       this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
         if (error) {
-          throw new Error(error);
+          throw new Error(error.description);
         }
         this.setSession(authResult, profile);
       });
@@ -51,17 +65,20 @@ export default class AuthProvider extends React.Component {
       expiresAt: JSON.stringify(
         authResult.expiresIn * 1000 + new Date().getTime()
       ),
-      profile: profile
+      profile: profile,
     };
 
-    this.setState(session, () => {
-      this.lock.hide();
-      this.scheduleRenewal();
-      this.storeSession(session);
-    });
+    this.setState(
+      (currentState) => ({ ...currentState, ...session }),
+      () => {
+        this.lock.hide();
+        this.scheduleRenewal();
+        this.storeSession(session);
+      }
+    );
   };
 
-  storeSession = session => {
+  storeSession = (session) => {
     const { storageKey } = this.props;
     localStorage.setItem(storageKey, JSON.stringify(session));
   };
@@ -72,7 +89,7 @@ export default class AuthProvider extends React.Component {
     return session ? JSON.parse(session) : null;
   };
 
-  isSessionExpired = expiresAt => {
+  isSessionExpired = (expiresAt) => {
     return new Date().getTime() > expiresAt;
   };
 
@@ -94,18 +111,18 @@ export default class AuthProvider extends React.Component {
     this.lock.show();
   };
 
-  logout = returnTo => {
+  logout = (returnTo) => {
     const { storageKey } = this.props;
     localStorage.removeItem(storageKey);
     clearTimeout(this.tokenRenewalTimeout);
     this.lock.logout({
-      returnTo: returnTo
+      returnTo: returnTo,
     });
   };
 
   scheduleRenewal = () => {
     const { expiresAt } = this.state;
-    const delay = expiresAt - Date.now();
+    const delay = Number(expiresAt) - Date.now();
     if (delay > 0) {
       this.tokenRenewalTimeout = setTimeout(() => {
         this.renewToken();
