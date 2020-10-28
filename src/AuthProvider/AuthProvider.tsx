@@ -2,7 +2,7 @@ import Auth0Lock from "auth0-lock";
 import React, { ReactNode } from "react";
 import { Provider } from "../context";
 
-interface AuthProviderProps {
+export interface AuthProviderProps {
   storageKey: string;
   clientId: string;
   domain: string;
